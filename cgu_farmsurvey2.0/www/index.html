@@ -51,6 +51,10 @@
         background-color: #018533;
         color: #fff;
     }
+    div.jqm-fullwidth{
+         background-color: #018533;
+    }
+   
   
     fieldset.incompleteField div.ui-radio label {
       border: red 1px solid;
@@ -65,7 +69,7 @@
     label{
        color: #414042
     }
-    .head{
+    .head1{
         background-color: #0bab47
     }
     .ui-bar-b{
@@ -75,22 +79,23 @@
         text-align: center;
     }
     .homecontent {
-        background: url(images/ipad_portrait.gif);
+        background: url(images/pad_portrait.gif);
         width:769px ;
-        height:808px;
+        height:1008px;
     }
     .homecontentinner {
         color: #414042;
         text-align: center;
+        margin-top: 40px;
     }
     .new1{
         background-color: #009fdf;
         border-color: #1f1f1f;
         color: #fff;
         text-shadow: 0 1px 0 #111;
-        height: 35px;
-        width:350px;
-        font-size: 30px;
+        height: 25px;
+        width: 170px;
+        font-size: 20px;
         text-align: center;
     }
     .foot{
@@ -120,6 +125,15 @@
     }
     div.helps span{
         padding-left: 10px;
+    }
+    div.head{
+        margin: 37px;
+        margin-left: -20px;
+        height: 80px;
+        
+    }
+    img{
+        margin-bottom: -59px;
     }
 
     </style>
@@ -189,17 +203,15 @@ function salesforceLogout() {
         </div>
         <!-- /header -->
 
-        <div data-role="content" class="ui-content jqm-content jqm-fullwidth head">
-            <div class="head headimg"><img src="images/logo_img.png" width="226" height="70" alt="CGU See It Through" border="0"></div>
+        <div data-role="content" class="ui-content jqm-content jqm-fullwidth homecontent">
+            <div class="head headimg"><img class="img" src="images/Logo.png" width="226" height="70" alt="CGU See It Through" border="0"></div>
             <div class="homecontentinner">
-                <h1>Welcome to the CGU Farm survey application!</h1>
+                <h1></h1>
                 <a href="#new" data-role="button" class="new1" data-mini="true" data-theme="b">New Survey</a>
             </div>
         </div>
         <!-- /content -->
-        <div data-role="content" class="ui-content jqm-content jqm-fullwidth homecontent">
 
-        </div>
         <!-- /content1 -->
 
         <div data-role="footer" data-position="fixed" data-theme="b" id="test">
@@ -837,21 +849,21 @@ function salesforceLogout() {
     $( window ).on( "orientationchange", function( event ) {
       var result = event.orientation;
         if(result=='landscape'){
-            $('.homecontent').css('background', 'url(images/iPad_Landscape.gif)');
+            $('.homecontent').css('background', 'url(images/Pad_Landscape.gif)');
             $('.homecontent').css('width', '1008px');
-            $('.homecontent').css('height', '568px');
+            $('.homecontent').css('height', '728px');
             $('.homecontentinner').css('color', '#414042');
             $('.homecontentinner').css('text-align', 'center');
-             $('.new1').css('margin-left', '310px');
+             $('.new1').css('margin-left', '390px');
         }
         else{
 
-            $('.homecontent').css('background', 'url(images/ipad_portrait.gif)');
+            $('.homecontent').css('background', 'url(images/pad_portrait.gif)');
             $('.homecontent').css('width', '768px');
-            $('.homecontent').css('height', '808px');
+            $('.homecontent').css('height', '990px');
             $('.homecontentinner').css('color', '#414042');
             $('.homecontentinner').css('text-align', 'center');
-            $('.new1').css('margin-left', '170px');
+            $('.new1').css('margin-left', '250px');
             
         }
     });

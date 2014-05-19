@@ -225,7 +225,7 @@ function myapp(client, userId) {
                         app.router.navigate('farmsurveys', {
                             trigger: true
                         });
-                        //alert('test2');
+                        alert('success');
                     },
                     error: function () {
                         alert('Error saving survey');
