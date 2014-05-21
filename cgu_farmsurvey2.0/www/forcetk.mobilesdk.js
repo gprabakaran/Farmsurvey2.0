@@ -74,7 +74,7 @@ if (forcetk.Client === undefined) {
      */
     forcetk.Client = function(clientId, loginUrl, proxyUrl, authCallback) {
         this.clientId = clientId;
-        this.loginUrl = loginUrl || 'https://test.salesforce.com/';
+        this.loginUrl = loginUrl || 'https://login.salesforce.com/';
         if (typeof proxyUrl === 'undefined' || proxyUrl === null) {
             this.proxyUrl = null;
             this.authzHeader = "Authorization";
