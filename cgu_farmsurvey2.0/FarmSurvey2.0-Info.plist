@@ -38,7 +38,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>SFDCOAuthLoginHost</key>
-	<string>login.salesforce.com</string>
+	<string>test.salesforce.com</string>
 	<key>UIFileSharingEnabled</key>
 	<false/>
 	<key>UIRequiredDeviceCapabilities</key>

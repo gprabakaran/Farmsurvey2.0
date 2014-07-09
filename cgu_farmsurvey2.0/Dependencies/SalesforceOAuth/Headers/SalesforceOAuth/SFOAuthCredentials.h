@@ -65,8 +65,8 @@ typedef enum {
 
 /** Logon host domain name.
  
- The domain used to initiate a user login, for example _login.salesforce.com_
- or _test.salesforce.com_. The default is _login.salesforce.com_.
+ The domain used to initiate a user login, for example _test.salesforce.com_
+ or _test.salesforce.com_. The default is _test.salesforce.com_.
  */
 @property (nonatomic, copy) NSString *domain;
 

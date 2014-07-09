@@ -15,7 +15,7 @@
     <script src="resources/lib/backbone.js" type="text/javascript"></script>
     <script src="forcetk.mobilesdk.js"></script>
     <script src="resources/lib/backbone.force.js" type="text/javascript"></script>
-
+    
     <script>
     $(document).bind("mobileinit", function () {
         $.mobile.ajaxEnabled = false;
@@ -136,6 +136,9 @@
         margin-bottom: -59px;
     }
 
+    .remove{
+        display: none;
+    }
     </style>
 
 <script type="text/javascript">
@@ -226,12 +229,12 @@ function salesforceLogout() {
             <br>
             <br>
             <div data-role="content" id="farmsurveys-help">
-               <div class="helps">
+               <!--<div class="helps">
                    <h2>Contact</h2>
                    <span>Website : </span><br><br>
                    <span>Email : </span><br><br>
                    <span>Phone : </span><br>
-               </div>
+               </div>-->
             </div>
         </div>
         <!-- /panel -->
@@ -396,6 +399,7 @@ function salesforceLogout() {
         <legend>Initial Impressions & Environment</legend>
         <label for="housekeeping_impression__c">1. What are the initial impressions of general housekeeping around the property?</label>
         <textarea cols="40" rows="8" name="housekeeping_impression__c" id="housekeeping_impression__c"><% if (typeof(housekeeping_impression__c) !== 'undefined') { print(housekeeping_impression__c); } %></textarea>
+        <div class="remove">
         <fieldset data-role="controlgroup" data-type="horizontal" id="plan_to_minimise_risk__c">
         <legend>2. Does the insured have a plan to minimise risk?</legend>
         <%  $.each(['Yes', 'No', 'N/A'], function(index, value) { %>
@@ -421,7 +425,8 @@ function salesforceLogout() {
         </select>
         <label for="boundary_comments__c">Please provide comments</label>
         <textarea cols="40" rows="8" name="boundary_comments__c" id="boundary_comments__c"><% if (typeof(boundary_comments__c) !== 'undefined') { print(boundary_comments__c); } %></textarea>
-        <label for="age_and_condition__c">5. Are the building conditions of the Farm Dwellings and Farm Buldings of an acceptable standard?</label>
+        </div>
+        <label for="age_and_condition__c">2. Are the building conditions of the Farm Dwellings and Farm Buldings of an acceptable standard?</label>
         <select name="age_and_condition__c" id="age_and_condition__c">
         <option value="">Please select</option>
         <%  $.each({'Yes - acceptable' : 'Yes - acceptable',
@@ -432,7 +437,7 @@ function salesforceLogout() {
         </select>
         <label for="age_and_condition_comments__c">Please provide comments</label>
         <textarea cols="40" rows="8" name="age_and_condition_comments__c" id="age_and_condition_comments__c"><% if (typeof(age_and_condition_comments__c) !== 'undefined') { print(age_and_condition_comments__c); } %></textarea>
-        <label for="roof_condition__c">6. Are the roof conditions of the Farm Dwellings and Farm Buldings of an acceptable standard?</label>
+        <label for="roof_condition__c">3. Are the roof conditions of the Farm Dwellings and Farm Buldings of an acceptable standard?</label>
         <select name="roof_condition__c" id="roof_condition__c">
         <option value="">Please select</option>
         <%  $.each({'Yes - acceptable' : 'Yes - acceptable',
@@ -443,6 +448,7 @@ function salesforceLogout() {
         </select>
         <label for="roof_condition_comments__c">Please provide comments</label>
         <textarea cols="40" rows="8" name="roof_condition_comments__c" id="roof_condition_comments__c"><% if (typeof(roof_condition_comments__c) !== 'undefined') { print(roof_condition_comments__c); } %></textarea>
+        <div class="remove">
         <fieldset data-role="controlgroup" data-type="horizontal" id="overhanging_branches__c">
         <legend>7. Are there any trees or branches that are overhanging any Farm Dwelling or Farm Buildings?</legend>
         <%  $.each(['Yes', 'No', 'N/A'], function(index, value) { %>
@@ -473,6 +479,7 @@ function salesforceLogout() {
                    <label for="unoccupied__c-<%- index %>"><%- value %></label>
                    <% }); %>
         </fieldset>
+        </div>
         </fieldset>
         <fieldset data-role="collapsible">
         <legend>Farm Dwellings</legend>
@@ -495,6 +502,15 @@ function salesforceLogout() {
                    <label for="other_structures_insured__c-<%- index %>"><%- value %></label>
                    <% }); %>
         </fieldset>
+
+        <fieldset data-role="controlgroup" data-type="horizontal" id="other_structures_age_condition__c">
+        <legend>1.a. If so, please provide details of age and condition:</legend>
+
+        <textarea cols="40" rows="8" name="other_structures_age_condition__c" id="other_structures_age_condition__c"><% if (typeof(other_structures_age_condition__c) !== 'undefined') { print(other_structures_age_condition__c); } %></textarea>
+
+        </fieldset>
+
+
         <fieldset data-role="controlgroup" data-type="horizontal" id="other_structures_good_condition__c">
         <legend>2. Are the structures in good condition and not susceptible to storm damage?</legend>
         <%  $.each(['Yes', 'No', 'N/A'], function(index, value) { %>
@@ -526,6 +542,50 @@ function salesforceLogout() {
                    <label for="non_farming_activity__c-<%- index %>"><%- value %></label>
                    <% }); %>
         </fieldset>
+
+        <fieldset data-role="controlgroup" data-type="horizontal" id="liability_full_details__c">
+        <legend>3.a. If yes, please provide full details:</legend>
+            <% if (typeof(liability_full_details__c) !== 'undefined') { %>
+                <input name="liability_full_details__c" id="liability_full_details__c" value="<%- liability_full_details__c %>" />
+            <% } else { %>
+                <input name="liability_full_details__c" id="liability_full_details__c" />
+            <% } %>
+        </fieldset>
+
+        <fieldset data-role="controlgroup" data-type="horizontal" id="liability_farm_contracting__c">
+        <legend>3.b.  Is there any farm contracting performed?</legend>
+            <%  $.each(['Yes', 'No', 'N/A'], function(index, value) { %>
+                <input type="radio" name="liability_farm_contracting__c" id="liability_farm_contracting__c-<%- index %>" value="<%- value %>"<% if (typeof(liability_farm_contracting__c) !== 'undefined' && liability_farm_contracting__c == value) { %> checked<% } %>>
+                <label for="liability_farm_contracting__c-<%- index %>"><%- value %></label>
+            <% }); %>
+        </fieldset>
+
+        <fieldset data-role="controlgroup" data-type="horizontal" id="liability_farm_turnover__c">
+        <legend>3.c. If so, what type and what % of the farm turnover does it represent?</legend>
+            <% if (typeof(liability_farm_turnover__c) !== 'undefined') { %>
+                <input name="liability_farm_turnover__c" id="liability_farm_turnover__c" value="<%- liability_farm_turnover__c %>" />
+            <% } else { %>
+                <input name="liability_farm_turnover__c" id="liability_farm_turnover__c" />
+            <% } %>
+        </fieldset>
+
+        <fieldset data-role="controlgroup" data-type="horizontal" id="liability_labour_hire__c">
+        <legend>3.d.  Is there any labour hire used?</legend>
+            <%  $.each(['Yes', 'No', 'N/A'], function(index, value) { %>
+                <input type="radio" name="liability_labour_hire__c" id="liability_labour_hire__c-<%- index %>" value="<%- value %>"<% if (typeof(liability_labour_hire__c) !== 'undefined' && liability_labour_hire__c == value) { %> checked<% } %>>
+                <label for="liability_labour_hire__c-<%- index %>"><%- value %></label>
+            <% }); %>
+        </fieldset>
+
+        <fieldset data-role="controlgroup" data-type="horizontal" id="liability_provide_full_details_work__c">
+        <legend>3.e. If so, please provide full details of the type of work carried out and the turnover in relation to this?</legend>
+            <% if (typeof(liability_provide_full_details_work__c) !== 'undefined') { %>
+                <input name="liability_provide_full_details_work__c" id="liability_provide_full_details_work__c" value="<%- liability_provide_full_details_work__c %>" />
+            <% } else { %>
+                <input name="liability_provide_full_details_work__c" id="liability_provide_full_details_work__c" />
+            <% } %>
+        </fieldset>
+
         </fieldset>
         <fieldset data-role="collapsible">
         <legend>Overall Survey Assessment</legend>
@@ -545,12 +605,19 @@ function salesforceLogout() {
         <fieldset data-role="collapsible">
         <legend>Risk Surveyor&#39;s Recommendation</legend>
         <fieldset data-role="controlgroup" data-type="horizontal" id="policy_discount__c">
-        <legend>1. In your opinion, does the overall assessment of this property warrant the application of a policy discount or loading?</legend>
-        <%  $.each(['Yes', 'No', 'N/A'], function(index, value) { %>
-                   <input type="radio" name="policy_discount__c" id="policy_discount__c-<%- index %>" value="<%- value %>"<% if (typeof(policy_discount__c) !== 'undefined' && policy_discount__c == value) { %> checked<% } %>>
-                   <label for="policy_discount__c-<%- index %>"><%- value %></label>
+        <legend><label>1. In your opinion, does the overall assessment of this property warrant the application of a policy discount or loading?</label></legend>
+
+        <select name="policy_discount__c" id="policy_discount__c">
+        <option value="">Please select</option>
+        <%  $.each({'Policy Loading' : 'Policy Loading',
+                   'Policy Discount' : 'Policy Discount',
+                   'No' : 'No'}, function(key, value) { %>
+                   <option value="<%= key %>"<% if (typeof(policy_discount__c) !== 'undefined' && policy_discount__c == key) { %> selected<% } %>><%= value %></option>
                    <% }); %>
+        </select>
+
         </fieldset>
+        <div class="remove">
         <label for="Policy_Loading_Discounting__c" class="select">2. Policy Loading/Discounting</label>
         <select name="Policy_Loading_Discounting__c" id="Policy_Loading_Discounting__c">
         <option value="">Please select</option>
@@ -560,9 +627,10 @@ function salesforceLogout() {
                         <option value="<%= key %>"<% if (typeof(Policy_Loading_Discounting__c) !== 'undefined' && Policy_Loading_Discounting__c == key) { %> selected<% } %>><%= value %></option>
                     <% }); %>
         </select>
-        <label for="policy_discount_reasons__c">3. Please provide reasons for your recommendations:</label>
+        </div>
+        <label for="policy_discount_reasons__c">2. Please provide reasons for your recommendations:</label>
         <textarea cols="40" rows="8" name="policy_discount_reasons__c" id="policy_discount_reasons__c"><% if (typeof(policy_discount_reasons__c) !== 'undefined') { print(policy_discount_reasons__c); } %></textarea>
-        <label for="policy_discount_comments__c">4. Please provide any final survey comments:</label>
+        <label for="policy_discount_comments__c">3. Please provide any final survey comments:</label>
         <textarea cols="40" rows="8" name="policy_discount_comments__c" id="policy_discount_comments__c"><% if (typeof(policy_discount_comments__c) !== 'undefined') { print(policy_discount_comments__c); } %></textarea>
         </fieldset>
         </div>
@@ -628,13 +696,58 @@ function salesforceLogout() {
         </div>
         <div data-role="fieldcontain">
         <fieldset data-role="controlgroup" data-type="horizontal">
-        <legend>4. Permanently Occupied?</legend>
+        <legend><label>4. Permanently Occupied?</label></legend>
         <%  $.each(['Yes', 'No', 'N/A'], function(index, value) { %>
                    <input type="radio" name="occupancy_status__c" id="occupancy_status__c-<%- index %>" value="<%- value %>"<% if (typeof(occupancy_status__c) !== 'undefined' && occupancy_status__c == value) { %> checked<% } %>>
                    <label for="occupancy_status__c-<%- index %>"><%- value %></label>
                    <% }); %>
         </fieldset>
         </div>
+
+        <div class="remove" data-role="fieldcontain" id="how_long_unoccupied">
+        <label for="how_long_unoccupied__c">4.a. How long as the Dwelling been unoccupied:</label>
+        
+            <input  name="how_long_unoccupied__c" id="how_long_unoccupied__c" value="<%- how_long_unoccupied__c %>" />
+           
+        </div>
+
+        <div class="remove" data-role="fieldcontain" id="how_long_anticipated">
+        <label for="how_long_anticipated__c">4.b. How long is it anticipated that it will be unoccupied:</label>
+        
+            <input  name="how_long_anticipated__c" id="how_long_anticipated__c" value="<%- how_long_anticipated__c %>" />
+           
+        </div>
+
+
+        <div class="remove" data-role="fieldcontain" id="have_services_disconnected">
+        <fieldset data-role="controlgroup">
+        <legend><label>4.c. Have all services been disconnected (i.e. Power,water and gas):</label></legend>
+        <%  $.each(['Yes', 'No', 'N/A'], function(index, value) { %>
+                   <input type="radio" name="have_services_disconnected__c" id="have_services_disconnected__c-<%- index %>" value="<%- value %>"<% if (typeof(have_services_disconnected__c) !== 'undefined' && have_services_disconnected__c == value) { %> checked<% } %>>
+                   <label for="have_services_disconnected__c-<%- index %>"><%- value %></label>
+                   <% }); %>
+        </fieldset>
+        </div>
+
+
+
+        <div class="remove" data-role="fieldcontain" id="how_ofen_inspected">
+        <label for="how_ofen_inspected__c">4.d. How often is the dwelling inspected both internally and externally (Should be at least fortnightly):</label>
+
+            <select name="how_ofen_inspected__c" id="how_ofen_inspected__c">
+            <option value="">Please select</option>
+            <%  $.each({'Daily' : 'Daily',
+                       'Weekly' : 'Weekly',
+                       'Fortnightly' : 'Fortnightly',
+                       'Monthly' : 'Monthly',
+                       'Quarterly' : 'Quarterly',
+                       'N/A' : 'N/A'}, function(key, value) { %>
+                       <option value="<%= key %>"<% if (typeof(construction__c) !== 'undefined' && construction__c == key) { %> selected<% } %>><%= value %></option>
+                       <% }); %>
+            </select>
+
+        </div>
+
         <div data-role="fieldcontain">
         <label for="construction__c" class="select">5. Construction</label>
         <select name="construction__c" id="construction__c">
@@ -659,13 +772,21 @@ function salesforceLogout() {
         </div>
         <div data-role="fieldcontain">
         <fieldset data-role="controlgroup">
-        <legend>7. If built prior to 1960, has it been completely rewired since 1960?</legend>
+        <legend><label>7. If built prior to 1960, has it been completely rewired since 1960?</label></legend>
         <%  $.each(['Yes', 'No', 'N/A'], function(index, value) { %>
                    <input type="radio" name="rewired__c" id="rewired__c-<%- index %>" value="<%- value %>"<% if (typeof(rewired__c) !== 'undefined' && rewired__c == value) { %> checked<% } %>>
                    <label for="rewired__c-<%- index %>"><%- value %></label>
                    <% }); %>
         </fieldset>
         </div>
+
+        <div data-role="fieldcontain" id="rewired_comments">
+        <label for="rewired_comments__c">7.a. Please provide comments:</label>
+
+            <textarea cols="40" rows="8" name="rewired_comments__c" id="rewired_comments__c"><% if (typeof(rewired_comments__c) !== 'undefined') { print(rewired_comments__c); } %></textarea>
+
+        </div>
+
         <div data-role="fieldcontain">
         <label for="sum_insured__c">8. Sum Insured ($)</label>
         <% if (typeof(sum_insured__c) !== 'undefined') { %>
@@ -677,7 +798,7 @@ function salesforceLogout() {
         <% if (typeof(Latitude__c) !== 'undefined' && Latitude__c !== null && typeof(Longitude__c) !== 'undefined' && Longitude__c !== null) { %>
             <div class="ui-grid-b">
                 <div class="ui-block-a">
-                    <p>Building location</p>
+                    <p><label>Building location</label></p>
                 </div>
                 <div class="ui-block-b">
                     <a href="maps:q=<%- Latitude__c %>,<%- Longitude__c %>&t=k" data-role="button" data-inline="true" target="foo">View Map</a>
@@ -689,7 +810,7 @@ function salesforceLogout() {
         <% } else { %>
             <div class="ui-grid-a">
                 <div class="ui-block-a">
-                    <p>Building location</p>
+                    <p><label>Building location</label></p>
                 </div>
                 <div class="ui-block-b">
                     <button type="submit" class="geolocate" data-inline="true" data-theme="c">Get Current Location</button>
@@ -699,7 +820,18 @@ function salesforceLogout() {
         <div id="dwelling-photos"></div>
         <div data-role="fieldcontain">
         <label for="conditions__c">9. How would you rate the condition of this Dwelling?</label>
-        <textarea cols="40" rows="8" name="conditions__c" id="conditions__c"><% if (typeof(conditions__c) !== 'undefined') { print(conditions__c); } %></textarea>
+
+        <select name="conditions__c" id="conditions__c">
+        <option value="">Please select</option>
+        <%  $.each({'Excellent' : 'Excellent',
+                   'Good' : 'Good',
+                   'Average' : 'Average',
+                   'Poor' : 'Poor'
+                    }, function(key, value) { %>
+                   <option value="<%= key %>"<% if (typeof(conditions__c) !== 'undefined' && conditions__c == key) { %> selected<% } %>><%= value %></option>
+                   <% }); %>
+        </select>
+
         </div>
         <button type="submit" class="delete" data-theme="e">Delete Dwelling</button>
     </script>
@@ -755,6 +887,7 @@ function salesforceLogout() {
                    'Brick/Wood Floors' : 'Brick/Wood Floors',
                    'Steel/Wood Floors' : 'Steel/Wood Floors',
                    'Fibro' : 'Fibro',
+                   'EPS' : 'EPS',
                    'Other' : 'Other'}, function(key, value) { %>
                    <option value="<%= key %>"<% if (typeof(construction_type__c) !== 'undefined' && construction_type__c == key) { %> selected<% } %>><%= value %></option>
                    <% }); %>
@@ -768,6 +901,25 @@ function salesforceLogout() {
                 <input type="number" name="age__c" id="age__c" />
                 <% } %>
         </div>
+
+        <div data-role="fieldcontain" id="renovations_maintenance">
+        <label for="renovations_maintenance__c">4.a. If built prior to 1960, has it had any renovations or maintenance since 1960? If so, please provide details:</label>
+
+            <%  $.each(['Yes', 'No', 'N/A'], function(index, value) { %>
+           <input type="radio" name="renovations_maintenance__c" id="renovations_maintenance__c-<%- index %>" value="<%- value %>"<% if (typeof(renovations_maintenance__c) !== 'undefined' && renovations_maintenance__c == value) { %> checked<% } %>>
+           <label for="renovations_maintenance__c-<%- index %>"><%- value %></label>
+           <% }); %>
+
+        </div>
+
+        <div data-role="fieldcontain" id="renovations_maintenance_comments">
+        <label for="renovations_maintenance_comments__c">4.b. Please provide comments:</label>
+
+            <textarea cols="40" rows="8" name="renovations_maintenance_comments__c" id="renovations_maintenance_comments__c"><% if (typeof(rewired_comments__c) !== 'undefined') { print(renovations_maintenance_comments__c); } %></textarea>
+
+        </div>
+
+
         <div data-role="fieldcontain">
         <label for="sum_insured__c">5. Sum Insured ($)</label>
         <% if (typeof(sum_insured__c) !== 'undefined') { %>
@@ -801,7 +953,18 @@ function salesforceLogout() {
         <div id="building-photos"></div>
         <div data-role="fieldcontain">
         <label for="conditions__c">6. How would you rate the condition of this Dwelling?</label>
-        <textarea cols="40" rows="8" name="conditions__c" id="conditions__c"><% if (typeof(conditions__c) !== 'undefined') { print(conditions__c); } %></textarea>
+
+        <select name="conditions__c" id="conditions__c">
+        <option value="">Please select</option>
+        <%  $.each({'Excellent' : 'Excellent',
+                   'Good' : 'Good',
+                   'Average' : 'Average',
+                   'Poor' : 'Poor'
+                    }, function(key, value) { %>
+                   <option value="<%= key %>"<% if (typeof(conditions__c) !== 'undefined' && conditions__c == key) { %> selected<% } %>><%= value %></option>
+                   <% }); %>
+        </select>
+
         </div>
         <button type="submit" class="delete" data-theme="e">Delete Building</button>
         </script>
@@ -809,7 +972,7 @@ function salesforceLogout() {
         <script type="text/template" id="farmphotos-template">
             <div class="ui-grid-b">
                 <div class="ui-block-a">   
-                    <p>Photos</p>
+                    <p><label>Photos</label></p>
                 </div>
                 <div class="ui-block-b">
                     <button type="submit" class="takePhoto" data-inline="true" data-theme="c">Take a Photo</button>

@@ -15,7 +15,8 @@ function myapp(client, userId) {
             'other_structures_insured__c', 'other_structures_good_condition__c',
             'frontage__c', 'fencing__c', 'non_farming_activity__c',
             'overall_assessment_rating__c', 'overall_assessment_comments__c',
-            'policy_discount__c', 'Policy_Loading_Discounting__c', 'policy_discount_reasons__c', 'policy_discount_comments__c', 'Submitted__c'
+            'policy_discount__c', 'Policy_Loading_Discounting__c', 'policy_discount_reasons__c', 'policy_discount_comments__c', 'Submitted__c',
+            'liability_full_details__c','liability_farm_contracting__c','liability_farm_turnover__c','liability_labour_hire__c','liability_provide_full_details_work__c','other_structures_age_condition__c'
         ],
         required: [
             'Prepared_for__c', 'prepared_for_phone__c', 'Intermediary__c', 'intermediary_phone__c', 'Date_of_Survey__c', 'situation__c', 'postcode__c', 'anszic_code__c',
@@ -40,7 +41,7 @@ function myapp(client, userId) {
     app.FarmDwelling = Backbone.Force.Model.extend({
         type: 'Farm_Survey_Dwellings__c',
         fields: ['Id', 'Name', 'unique_name__c', 
-            'property_occupancy__c', 'description__c', 'occupancy_status__c', 'construction__c', 'age__c', 'rewired__c',
+            'property_occupancy__c', 'description__c', 'occupancy_status__c', 'how_long_unoccupied__c','how_long_anticipated__c','have_services_disconnected__c','how_ofen_inspected__c','construction__c', 'age__c', 'rewired__c','rewired_comments__c',
             'sum_insured__c', 'Latitude__c', 'Longitude__c', 'conditions__c', 'Farm_Survey__c'
         ],
         defaults: {
@@ -49,9 +50,14 @@ function myapp(client, userId) {
             'property_occupancy__c': null,
             'description__c': null,
             'occupancy_status__c': null,
+            'how_long_unoccupied__c' : null,
+            'how_long_anticipated__c' : null,
+            'have_services_disconnected__c' : null,
+            'how_ofen_inspected__c' : null,
             'construction__c': null,
             'age__c': null,
             'rewired__c': null,
+            'rewired_comments__c': null,
             'sum_insured__c': null,
             'Latitude__c': null,
             'Longitude__c': null,
@@ -68,7 +74,7 @@ function myapp(client, userId) {
         type: 'Farm_Survey_Buildings__c',
         fields: ['Id', 'Name', 'unique_name__c',
             'description__c', 'construction_type__c', 'age__c',
-            'sum_insured__c', 'Latitude__c', 'Longitude__c', 'conditions__c', 'Farm_Survey__c'
+            'sum_insured__c', 'Latitude__c', 'Longitude__c', 'conditions__c', 'Farm_Survey__c','renovations_maintenance_comments__c','renovations_maintenance__c'
         ],
         defaults: {
             'isDeleted': false,
@@ -76,6 +82,8 @@ function myapp(client, userId) {
             'description__c': null,
             'construction_type__c': null,
             'age__c': null,
+            'renovations_maintenance__c': null,
+            'renovations_maintenance_comments__c': null,
             'sum_insured__c': null,
             'Latitude__c': null,
             'Longitude__c': null,
@@ -213,7 +221,7 @@ function myapp(client, userId) {
                     }
                 }
                 var fieldsets = $('fieldset.ui-collapsible').has('.incompleteField').addClass('incompleteCollapsible');
-                alert('Please complete all the fields marked in red and then submit again');
+                navigator.notification.alert( 'Please complete all the fields marked in red and then submit again' , null , 'FarmSurvey' , 'OK' );
             } else {
                 this.model.set("Submitted__c", true);
                 this.model.save(null, {
@@ -221,7 +229,6 @@ function myapp(client, userId) {
                         model.trigger('saved', {
                             model: model
                         });
-                        //alert('test1');
                         app.router.navigate('farmsurveys', {
                             trigger: true
                         });
@@ -251,29 +258,37 @@ function myapp(client, userId) {
                             trigger: true
                         });
                     })
+                    navigator.notification.alert( 'Your Survey is saved is successfully' , null , 'FarmSurvey' , 'OK' );
                 },
                 error: function () {
                     alert('Error saving survey');
+                    app.router.navigate('/panel-fixed-page1', true);
                 }
             });
             return false;
         },
-        destroy: function () {
+        destroy: function () {            
             if (this.model.isNew()) {
                 app.router.navigate('farmsurveys', {
                     trigger: true
                 });
             }
-            this.model.destroy({
-                success: function () {
-                    app.router.navigate('farmsurveys', {
-                        trigger: true
-                    });
-                },
-                error: function () {
-                    alert('Error deleting survey');
-                }
-            });
+            if (confirm("Are you sure you want to delete this Survey?")){
+                alert("deleting");
+                this.model.destroy({
+                    success: function () {
+                        app.router.navigate('farmsurveys', {
+                            trigger: true
+                        });
+                        app.router.navigate('/panel-fixed-page1', true);
+                    },
+                    error: function () {
+                        alert('Error deleting survey');
+                    }
+                });
+            } else {
+                return false;
+            }
             return false;
         }
     });
@@ -335,8 +350,8 @@ function myapp(client, userId) {
                             model: model
                         });
                     },
-                    error: function () {
-                        alert('Error saving dwelling');
+                    error: function () { 
+                        alert('Error saving dwelling' + error);
                     }
                 });
             }
@@ -346,7 +361,7 @@ function myapp(client, userId) {
             
                     },
                     error: function () {
-                        alert('Error deleting dwelling');
+                        alert('Error deleting dwelling123');
                     }
                 });
             }
@@ -362,22 +377,27 @@ function myapp(client, userId) {
         },
         render: function () {
             this.$el.html(this.template(this.model.toJSON()));
-            
             this.$('#dwelling-photos').html(new app.FarmPhotosView({
                 model: this.model
             }).el);
-            
             this.$el.trigger('create');
-            
+            var test = $(this.el).find('input[name=occupancy_status__c]:checked');
+            if(test.val()=='No'){
+                $(this.el).find('.remove').show();
+            }
+            if(test.val()=='Yes'){
+                $(this.el).find('.remove').hide();
+            }
             return this; // enable chained calls
         },
         initialize: function () {
-            this.model.on('destroy', this.remove, this);            
+            this.model.on('destroy', this.remove, this);
         },
         events: {
             'change': 'change',
             'click .delete': 'delete',
-            'click .geolocate': 'geolocate'
+            'click .geolocate': 'geolocate',
+            'change input[name=occupancy_status__c]' : 'onRadioClick'
         },
         change: function (event) {
             // Apply the change to the model
@@ -386,6 +406,26 @@ function myapp(client, userId) {
             change[target.name] = target.value;
             this.model.set(change);
             return false;
+        },
+       onRadioClick: function (evt) {
+            if ($(evt.currentTarget).val()=='No'){
+                $("#how_long_unoccupied").show();
+                $("#how_long_anticipated").show();
+                $("#have_services_disconnected").show();
+                $("#how_ofen_inspected").show();
+            }
+            if ($(evt.currentTarget).val()=='Yes'){
+                $("#how_long_unoccupied").hide();
+                $("#how_long_anticipated").hide();
+                $("#have_services_disconnected").hide();
+                $("#how_ofen_inspected").hide();
+            }
+            if ($(evt.currentTarget).val()=='N/A'){
+                $("#how_long_unoccupied").hide();
+                $("#how_long_anticipated").hide();
+                $("#have_services_disconnected").hide();
+                $("#how_ofen_inspected").hide();
+            }
         },
         geolocate: function () {
             $.mobile.loading("show", {
@@ -659,7 +699,6 @@ function myapp(client, userId) {
                 }
                 photosToSave[i].save(null, {
                     success: function (model) {
-
                     },
                     error: function () {
                         alert('Error uploading photo');
