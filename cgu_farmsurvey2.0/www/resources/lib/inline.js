@@ -20,7 +20,7 @@ function myapp(client, userId) {
         ],
         required: [
             'Prepared_for__c', 'prepared_for_phone__c', 'Intermediary__c', 'intermediary_phone__c', 'Date_of_Survey__c', 'situation__c', 'postcode__c', 'anszic_code__c',
-            'housekeeping_impression__c', 'plan_to_minimise_risk__c', 'boundaries__c', 'boundary_compliance__c', 'age_and_condition__c', 'roof_condition__c', 'overhanging_branches__c', 'gutters__c', 'elevation__c', 'unoccupied__c',
+            'housekeeping_impression__c', 'age_and_condition__c', 'roof_condition__c',
             'other_structures_insured__c', 'other_structures_good_condition__c',
             'frontage__c', 'fencing__c', 'non_farming_activity__c',
             'overall_assessment_rating__c',
@@ -232,10 +232,11 @@ function myapp(client, userId) {
                         app.router.navigate('farmsurveys', {
                             trigger: true
                         });
-                        alert('success');
+                        navigator.notification.alert( 'Successfully submitted FarmSurvey' , null , 'FarmSurvey' , 'OK' );
+                        app.router.navigate('/panel-fixed-page1', true);
                     },
                     error: function () {
-                        alert('Error saving survey');
+                        navigator.notification.alert( 'Error in saving FarmSurvey' , null , 'FarmSurvey' , 'OK' );
                     }
                 });
             }
@@ -261,7 +262,7 @@ function myapp(client, userId) {
                     navigator.notification.alert( 'Your Survey is saved is successfully' , null , 'FarmSurvey' , 'OK' );
                 },
                 error: function () {
-                    alert('Error saving survey');
+                    navigator.notification.alert( 'Error in saving FarmSurvey' , null , 'FarmSurvey' , 'OK' );
                     app.router.navigate('/panel-fixed-page1', true);
                 }
             });
@@ -274,7 +275,6 @@ function myapp(client, userId) {
                 });
             }
             if (confirm("Are you sure you want to delete this Survey?")){
-                alert("deleting");
                 this.model.destroy({
                     success: function () {
                         app.router.navigate('farmsurveys', {
@@ -283,7 +283,7 @@ function myapp(client, userId) {
                         app.router.navigate('/panel-fixed-page1', true);
                     },
                     error: function () {
-                        alert('Error deleting survey');
+                        navigator.notification.alert( 'Error in deleting FarmSurvey' , null , 'FarmSurvey' , 'OK' );
                     }
                 });
             } else {
@@ -351,7 +351,7 @@ function myapp(client, userId) {
                         });
                     },
                     error: function () { 
-                        alert('Error saving dwelling' + error);
+                        navigator.notification.alert( 'Error in saving dwelling' + error , null , 'FarmSurvey' , 'OK' );
                     }
                 });
             }
@@ -361,7 +361,7 @@ function myapp(client, userId) {
             
                     },
                     error: function () {
-                        alert('Error deleting dwelling123');
+                        navigator.notification.alert( 'Error in deleting dwelling' , null , 'FarmSurvey' , 'OK' );
                     }
                 });
             }
@@ -453,7 +453,7 @@ function myapp(client, userId) {
 
             function error() {
                 $.mobile.loading("hide");
-                alert("Geocoder failed");
+                navigator.notification.alert( 'Geocoder failed' , null , 'FarmSurvey' , 'OK' );
             }
 
             return false;
@@ -520,7 +520,7 @@ function myapp(client, userId) {
                         });
                     },
                     error: function () {
-                        alert('Error saving building');
+                        navigator.notification.alert( 'Error in saving Farm-Building' , null , 'FarmSurvey' , 'OK' );
                     }
                 });
             }
@@ -530,7 +530,7 @@ function myapp(client, userId) {
 
                     },
                     error: function () {
-                        alert('Error deleting building');
+                        navigator.notification.alert( 'Error in deleting Farm-Building' , null , 'FarmSurvey' , 'OK' );
                     }
                 });
             }
@@ -597,7 +597,7 @@ function myapp(client, userId) {
 
             function error() {
                 $.mobile.loading("hide");
-                alert("Geocoder failed");
+                navigator.notification.alert( 'Geocoder failed' , null , 'FarmSurvey' , 'OK' );
             }
 
             return false;
@@ -661,7 +661,7 @@ function myapp(client, userId) {
             }
             
             function fail(message) {
-                
+                navigator.notification.alert( 'Failed because: ' + message , null , 'FarmSurvey' , 'OK' );
             }
             return false;
 		},
@@ -681,7 +681,7 @@ function myapp(client, userId) {
             }
                         
             function fail(message) {
-                
+                navigator.notification.alert( 'Failed because: ' + message , null , 'FarmSurvey' , 'OK' );
             }
             return false;
 		},
@@ -693,6 +693,11 @@ function myapp(client, userId) {
             var photosToDelete = this.model.photos.where({
                 'isDeleted' : true 
             });
+            if(photosToSave.length ==0)
+            {
+                navigator.notification.alert( 'No Photos are attached' , null , 'FarmSurvey' , 'OK' );
+                return false;
+            }
             for (var i = 0; i < photosToSave.length; i++) {
                 if (photosToSave[i].get("ParentId") === undefined || photosToSave[i].get("ParentId") === null) {
                     photosToSave[i].set("ParentId", this.model.get("Id"));
@@ -701,7 +706,7 @@ function myapp(client, userId) {
                     success: function (model) {
                     },
                     error: function () {
-                        alert('Error uploading photo');
+                        navigator.notification.alert( 'Error in uploading photo' , null , 'FarmSurvey' , 'OK' );
                     }
                 });
             }
@@ -711,7 +716,7 @@ function myapp(client, userId) {
             
                     },
                     error: function () {
-                        alert('Error deleting photo');
+                        navigator.notification.alert( 'Error in deleting photo' , null , 'FarmSurvey' , 'OK' );
                     }
                 });
             }

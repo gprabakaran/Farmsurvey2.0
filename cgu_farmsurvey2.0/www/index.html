@@ -7,7 +7,7 @@
     <link href="css/jquery.mobile-1.4.2.min.css" rel="stylesheet">
 
     <script src="js/jquery.js"></script>
-    <script src="cordova-2.3.0.js"></script>
+    <script src="resources/lib/cordova.js"></script>
     <script src="cordova.force.js"></script>
     <script src="resources/lib/SFHybridApp.js"></script>
     <script src="resources/lib/SalesforceOAuthPlugin.js"></script>
@@ -399,33 +399,6 @@ function salesforceLogout() {
         <legend>Initial Impressions & Environment</legend>
         <label for="housekeeping_impression__c">1. What are the initial impressions of general housekeeping around the property?</label>
         <textarea cols="40" rows="8" name="housekeeping_impression__c" id="housekeeping_impression__c"><% if (typeof(housekeeping_impression__c) !== 'undefined') { print(housekeeping_impression__c); } %></textarea>
-        <div class="remove">
-        <fieldset data-role="controlgroup" data-type="horizontal" id="plan_to_minimise_risk__c">
-        <legend>2. Does the insured have a plan to minimise risk?</legend>
-        <%  $.each(['Yes', 'No', 'N/A'], function(index, value) { %>
-                   <input type="radio" name="plan_to_minimise_risk__c" id="plan_to_minimise_risk__c-<%- index %>" value="<%- value %>"<% if (typeof(plan_to_minimise_risk__c) !== 'undefined' && plan_to_minimise_risk__c == value) { %> checked<% } %>>
-                   <label for="plan_to_minimise_risk__c-<%- index %>"><%- value %></label>
-                   <% }); %>
-        </fieldset>
-        <fieldset data-role="controlgroup" data-type="horizontal" id="boundaries__c">
-        <legend>3. Is the farm bounded on any side by State Forest, National Forest or Bushland?</legend>
-        <%  $.each(['Yes', 'No', 'N/A'], function(index, value) { %>
-                   <input type="radio" name="boundaries__c" id="boundaries__c-<%- index %>" value="<%- value %>"<% if (typeof(boundaries__c) !== 'undefined' && boundaries__c == value) { %> checked<% } %>>
-                   <label for="boundaries__c-<%- index %>"><%- value %></label>
-                   <% }); %>
-        </fieldset>
-        <label for="boundary_compliance__c">4. Does the property comply with the Building Protection Zone (BPZ) requirements?</label>
-        <select name="boundary_compliance__c" id="boundary_compliance__c">
-        <option value="">Please select</option>
-        <%  $.each({'Yes - complies fully' : 'Yes - complies fully',
-                   'Partial compliance' : 'Partial compliance',
-                   'No - does not comply' : 'No - does not comply'}, function(key, value) { %>
-                   <option value="<%= key %>"<% if (typeof(boundary_compliance__c) !== 'undefined' && boundary_compliance__c == key) { %> selected<% } %>><%= value %></option>
-                   <% }); %>
-        </select>
-        <label for="boundary_comments__c">Please provide comments</label>
-        <textarea cols="40" rows="8" name="boundary_comments__c" id="boundary_comments__c"><% if (typeof(boundary_comments__c) !== 'undefined') { print(boundary_comments__c); } %></textarea>
-        </div>
         <label for="age_and_condition__c">2. Are the building conditions of the Farm Dwellings and Farm Buldings of an acceptable standard?</label>
         <select name="age_and_condition__c" id="age_and_condition__c">
         <option value="">Please select</option>
@@ -448,38 +421,6 @@ function salesforceLogout() {
         </select>
         <label for="roof_condition_comments__c">Please provide comments</label>
         <textarea cols="40" rows="8" name="roof_condition_comments__c" id="roof_condition_comments__c"><% if (typeof(roof_condition_comments__c) !== 'undefined') { print(roof_condition_comments__c); } %></textarea>
-        <div class="remove">
-        <fieldset data-role="controlgroup" data-type="horizontal" id="overhanging_branches__c">
-        <legend>7. Are there any trees or branches that are overhanging any Farm Dwelling or Farm Buildings?</legend>
-        <%  $.each(['Yes', 'No', 'N/A'], function(index, value) { %>
-                   <input type="radio" name="overhanging_branches__c" id="overhanging_branches__c-<%- index %>" value="<%- value %>"<% if (typeof(overhanging_branches__c) !== 'undefined' && overhanging_branches__c == value) { %> checked<% } %>>
-                   <label for="overhanging_branches__c-<%- index %>"><%- value %></label>
-                   <% }); %>
-        </fieldset>
-        <label for="overhanging_branches_comments__c">Please provide comments</label>
-        <textarea cols="40" rows="8" name="overhanging_branches_comments__c" id="overhanging_branches_comments__c"><% if (typeof(overhanging_branches_comments__c) !== 'undefined') { print(overhanging_branches_comments__c); } %></textarea>
-        <fieldset data-role="controlgroup" data-type="horizontal" id="gutters__c">
-        <legend>8. Are all gutters clear of debris and leaves?</legend>
-        <%  $.each(['Yes', 'No', 'N/A'], function(index, value) { %>
-                   <input type="radio" name="gutters__c" id="gutters__c-<%- index %>" value="<%- value %>"<% if (typeof(gutters__c) !== 'undefined' && gutters__c == value) { %> checked<% } %>>
-                   <label for="gutters__c-<%- index %>"><%- value %></label>
-                   <% }); %>
-        </fieldset>
-        <fieldset data-role="controlgroup" data-type="horizontal" id="elevation__c">
-        <legend>9. Are any of the buildings elevated?</legend>
-        <%  $.each(['Yes', 'No', 'N/A'], function(index, value) { %>
-                   <input type="radio" name="elevation__c" id="elevation__c-<%- index %>" value="<%- value %>"<% if (typeof(elevation__c) !== 'undefined' && elevation__c == value) { %> checked<% } %>>
-                   <label for="elevation__c-<%- index %>"><%- value %></label>
-                   <% }); %>
-        </fieldset>
-        <fieldset data-role="controlgroup" data-type="horizontal" id="unoccupied__c">
-        <legend>10. Are there any unoccupied Farm Dwellings?</legend>
-        <%  $.each(['Yes', 'No', 'N/A'], function(index, value) { %>
-                   <input type="radio" name="unoccupied__c" id="unoccupied__c-<%- index %>" value="<%- value %>"<% if (typeof(unoccupied__c) !== 'undefined' && unoccupied__c == value) { %> checked<% } %>>
-                   <label for="unoccupied__c-<%- index %>"><%- value %></label>
-                   <% }); %>
-        </fieldset>
-        </div>
         </fieldset>
         <fieldset data-role="collapsible">
         <legend>Farm Dwellings</legend>
