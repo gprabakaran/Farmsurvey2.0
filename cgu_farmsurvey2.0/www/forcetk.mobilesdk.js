@@ -52,7 +52,7 @@ if (forcetk.Client === undefined) {
      * allowing JavaScript in Visualforce pages to use the API via the Ajax
      * Proxy.
      * @param [clientId=null] 'Consumer Key' in the Remote Access app settings
-     * @param [loginUrl='https://test.salesforce.com/'] Login endpoint
+     * @param [loginUrl='https://login.salesforce.com/'] Login endpoint
      * @param [proxyUrl=null] Proxy URL. Omit if running on Visualforce or
      *                  Cordova etc
      * @constructor
@@ -66,7 +66,7 @@ if (forcetk.Client === undefined) {
      * allowing JavaScript in Visualforce pages to use the API via the Ajax
      * Proxy.
      * @param [clientId=null] 'Consumer Key' in the Remote Access app settings
-     * @param [loginUrl='https://test.salesforce.com/'] Login endpoint
+     * @param [loginUrl='https://login.salesforce.com/'] Login endpoint
      * @param [proxyUrl=null] Proxy URL. Omit if running on Visualforce or
      *                  Cordova etc
      * @param authCallback Callback method to perform authentication when 401 is received.
@@ -74,7 +74,7 @@ if (forcetk.Client === undefined) {
      */
     forcetk.Client = function(clientId, loginUrl, proxyUrl, authCallback) {
         this.clientId = clientId;
-        this.loginUrl = loginUrl || 'https://test.salesforce.com/';
+        this.loginUrl = loginUrl || 'https://login.salesforce.com/';
         if (typeof proxyUrl === 'undefined' || proxyUrl === null) {
             this.proxyUrl = null;
             this.authzHeader = "Authorization";

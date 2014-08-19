@@ -696,7 +696,7 @@ function myapp(client, userId) {
             if(photosToSave.length ==0)
             {
                 navigator.notification.alert( 'No Photos are attached' , null , 'FarmSurvey' , 'OK' );
-                return false;
+                //return false;
             }
             for (var i = 0; i < photosToSave.length; i++) {
                 if (photosToSave[i].get("ParentId") === undefined || photosToSave[i].get("ParentId") === null) {

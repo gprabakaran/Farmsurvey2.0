@@ -65,8 +65,8 @@ typedef enum {
 
 /** Logon host domain name.
  
- The domain used to initiate a user login, for example _test.salesforce.com_
- or _test.salesforce.com_. The default is _test.salesforce.com_.
+ The domain used to initiate a user login, for example _login.salesforce.com_
+ or _login.salesforce.com_. The default is _login.salesforce.com_.
  */
 @property (nonatomic, copy) NSString *domain;
 
@@ -148,7 +148,7 @@ typedef enum {
 @property (nonatomic, copy) NSDate *issuedAt;     
 
 /** The identity URL for the user returned as part of a successful authentication response.
- The format of the URL is: _https://test.salesforce.com/ID/orgID/userID_ where orgId is the ID of the Salesforce organization 
+ The format of the URL is: _https://login.salesforce.com/ID/orgID/userID_ where orgId is the ID of the Salesforce organization 
  that the user belongs to, and userID is the Salesforce user ID.
  
  This property is set by the `SFOAuthCoordinator` after authentication has successfully completed.
