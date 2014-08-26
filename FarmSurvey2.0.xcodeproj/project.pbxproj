@@ -54,6 +54,7 @@
 		82BBB5CB1793994300374DD8 /* libSalesforceHybridSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82BBB5CA1793994300374DD8 /* libSalesforceHybridSDK.a */; };
 		82BBB5D31793995B00374DD8 /* libSalesforceOAuth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82BBB5D21793995B00374DD8 /* libSalesforceOAuth.a */; };
 		82BBB5EC1793997A00374DD8 /* libSalesforceSDKCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82BBB5EB1793997A00374DD8 /* libSalesforceSDKCore.a */; };
+		BD83AA8319A829CE00943726 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD83AA8219A829CE00943726 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -215,6 +216,7 @@
 		82BBB5E91793997A00374DD8 /* SFSoupIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSoupIndex.h; sourceTree = "<group>"; };
 		82BBB5EA1793997A00374DD8 /* SFStoreCursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFStoreCursor.h; sourceTree = "<group>"; };
 		82BBB5EB1793997A00374DD8 /* libSalesforceSDKCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSalesforceSDKCore.a; sourceTree = "<group>"; };
+		BD83AA8219A829CE00943726 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = FarmSurvey2.0/Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,6 +260,7 @@
 		824AA0821725140400C9BD79 = {
 			isa = PBXGroup;
 			children = (
+				BD83AA8219A829CE00943726 /* Images.xcassets */,
 				824AA0941725140400C9BD79 /* cgu_farmsurvey2.0 */,
 				824AA08D1725140400C9BD79 /* Frameworks */,
 				824AA08C1725140400C9BD79 /* Products */,
@@ -706,6 +709,7 @@
 				824AA0DA172518B000C9BD79 /* www in Resources */,
 				824AA0DD17251BD000C9BD79 /* SalesforceSDKResources.bundle in Resources */,
 				824AA0DE17251BD000C9BD79 /* Settings.bundle in Resources */,
+				BD83AA8319A829CE00943726 /* Images.xcassets in Resources */,
 				824AA0E31725A40A00C9BD79 /* config.xml in Resources */,
 				824AA2181725AA3F00C9BD79 /* openssl_license.txt in Resources */,
 				824AA21E1725AA4000C9BD79 /* LICENSE in Resources */,
@@ -813,6 +817,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "cgu_farmsurvey2.0/FarmSurvey2.0-Prefix.pch";
@@ -849,6 +855,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "cgu_farmsurvey2.0/FarmSurvey2.0-Prefix.pch";
@@ -918,6 +926,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "cgu_farmsurvey2.0/FarmSurvey2.0-Prefix.pch";
@@ -988,6 +998,8 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				"ARCHS[sdk=*]" = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "cgu_farmsurvey2.0/FarmSurvey2.0-Prefix.pch";
