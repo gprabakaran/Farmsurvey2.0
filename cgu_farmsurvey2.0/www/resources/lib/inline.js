@@ -223,22 +223,38 @@ function myapp(client, userId) {
                 var fieldsets = $('fieldset.ui-collapsible').has('.incompleteField').addClass('incompleteCollapsible');
                 navigator.notification.alert( 'Please complete all the fields marked in red and then submit again' , null , 'FarmSurvey' , 'OK' );
             } else {
-                this.model.set("Submitted__c", true);
-                this.model.save(null, {
-                    success: function (model) {
-                        model.trigger('saved', {
-                            model: model
-                        });
-                        app.router.navigate('farmsurveys', {
-                            trigger: true
-                        });
-                        navigator.notification.alert( 'Successfully submitted FarmSurvey' , null , 'FarmSurvey' , 'OK' );
-                        app.router.navigate('/panel-fixed-page1', true);
-                    },
-                    error: function () {
-                        navigator.notification.alert( 'Error in saving FarmSurvey' , null , 'FarmSurvey' , 'OK' );
+                var hasPhotosForAllDwellingsAndBuildings = true;
+                $(".farmphotos-class").each(function() {
+                    var $this = $(this);
+                    var img = $this.find("img");
+                    if (img.length === 0) {
+                        $this.addClass('incompleteField');
+                        hasPhotosForAllDwellingsAndBuildings = false;
                     }
                 });
+                if (!hasPhotosForAllDwellingsAndBuildings) {
+                    $('fieldset.ui-collapsible').has('.incompleteField').addClass('incompleteCollapsible');
+                    navigator.notification.alert( 'Please add photos to all Dwellings and Buildings and then submit again' , null , 'FarmSurvey' , 'OK' );
+                }
+                else
+                {
+                    this.model.set("Submitted__c", true);
+                    this.model.save(null, {
+                        success: function (model) {
+                            model.trigger('saved', {
+                                model: model
+                            });
+                            app.router.navigate('farmsurveys', {
+                                trigger: true
+                            });
+                            navigator.notification.alert( 'Successfully submitted FarmSurvey' , null , 'FarmSurvey' , 'OK' );
+                            app.router.navigate('/panel-fixed-page1', true);
+                        },
+                        error: function () {
+                            navigator.notification.alert( 'Error in saving FarmSurvey' , null , 'FarmSurvey' , 'OK' );
+                        }
+                    });
+                }//val eles
             }
             return false;
         },
@@ -258,7 +274,7 @@ function myapp(client, userId) {
                         app.router.navigate('farmsurveys', {
                             trigger: true
                         });
-                    })
+                    });
                     navigator.notification.alert( 'Your Survey is saved is successfully' , null , 'FarmSurvey' , 'OK' );
                 },
                 error: function () {
@@ -268,7 +284,7 @@ function myapp(client, userId) {
             });
             return false;
         },
-        destroy: function () {            
+        destroy: function () {
             if (this.model.isNew()) {
                 app.router.navigate('farmsurveys', {
                     trigger: true
@@ -292,7 +308,6 @@ function myapp(client, userId) {
             return false;
         }
     });
-
     // renders the full list of Dwellings calling FarmDwellingDetailView for each one
     app.FarmDwellingsView = Backbone.View.extend({
         template: _.template($('#farmdwellings-template').html()),
@@ -464,7 +479,6 @@ function myapp(client, userId) {
             return false;
         }
     });
-    
     // renders the full list of Buildings calling FarmBuildingDetailView for each one
     app.FarmBuildingsView = Backbone.View.extend({
         template: _.template($('#farmbuildings-template').html()),
@@ -693,11 +707,6 @@ function myapp(client, userId) {
             var photosToDelete = this.model.photos.where({
                 'isDeleted' : true 
             });
-            if(photosToSave.length ==0)
-            {
-                navigator.notification.alert( 'No Photos are attached' , null , 'FarmSurvey' , 'OK' );
-                //return false;
-            }
             for (var i = 0; i < photosToSave.length; i++) {
                 if (photosToSave[i].get("ParentId") === undefined || photosToSave[i].get("ParentId") === null) {
                     photosToSave[i].set("ParentId", this.model.get("Id"));
