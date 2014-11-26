@@ -286,7 +286,7 @@ function salesforceLogout() {
             <input type="hidden" name="Id" id="Id" value="<%- Id %>" />
             <% } %>
         <div data-role="fieldcontain">
-        <label for="Prepared_for__c">1. End Insured Name:</label>
+        <label for="Prepared_for__c">Insured Name:</label>
         <% if (typeof(Prepared_for__c) !== 'undefined') { %>
             <input name="Prepared_for__c" id="Prepared_for__c" value="<%- Prepared_for__c %>" />
             <% } else { %>
@@ -294,7 +294,7 @@ function salesforceLogout() {
                 <% } %>
         </div>
         <div data-role="fieldcontain">
-        <label for="prepared_for_phone__c">2. Contact Phone #:</label>
+        <label for="prepared_for_phone__c">Insured Phone #:</label>
         <% if (typeof(prepared_for_phone__c) !== 'undefined') { %>
             <input type="tel" name="prepared_for_phone__c" id="prepared_for_phone__c" value="<%- prepared_for_phone__c %>" />
             <% } else { %>
@@ -302,7 +302,7 @@ function salesforceLogout() {
                 <% } %>
         </div>
         <div data-role="fieldcontain">
-        <label for="Intermediary__c">3. Intermediary:</label>
+        <label for="Intermediary__c">Intermediary:</label>
         <% if (typeof(Intermediary__c) !== 'undefined') { %>
             <input name="Intermediary__c" id="Intermediary__c" value="<%- Intermediary__c %>" />
             <% } else { %>
@@ -310,7 +310,7 @@ function salesforceLogout() {
                 <% } %>
         </div>
         <div data-role="fieldcontain">
-        <label for="intermediary_phone__c">4. Intermediary Contact Phone #:</label>
+        <label for="intermediary_phone__c">Intermediary Phone #:</label>
         <% if (typeof(intermediary_phone__c) !== 'undefined') { %>
             <input type="tel" name="intermediary_phone__c" id="intermediary_phone__c" value="<%- intermediary_phone__c %>" />
             <% } else { %>
@@ -318,13 +318,16 @@ function salesforceLogout() {
                 <% } %>
         </div>
         <div data-role="fieldcontain">
-        <label for="Date_of_Survey__c">5. Date of Survey:</label>
+        <label for="Date_of_Survey__c">Date of Survey:</label>
         <% if (typeof(Date_of_Survey__c) !== 'undefined') { %>
             <input type="date" name="Date_of_Survey__c" id="Date_of_Survey__c" value="<%- Date_of_Survey__c %>" />
             <% } else { %>
                 <input type="date" name="Date_of_Survey__c" id="Date_of_Survey__c" />
                 <% } %>
         </div>
+
+<div class="remove">
+
         <div data-role="fieldcontain">
         <label for="Reference_Number__c">6. Customer Number:</label>
         <% if (typeof(Reference_Number__c) !== 'undefined') { %>
@@ -341,8 +344,10 @@ function salesforceLogout() {
                 <input type="text" name="Policy_Number__c" id="Policy_Number__c" />
                 <% } %>
         </div>
+
+</div>
         <div data-role="fieldcontain">
-        <label for="situation__c">8. Situation Address:</label>
+        <label for="situation__c">Situation Address:</label>
         <% if (typeof(situation__c) !== 'undefined') { %>
             <input type="text" name="situation__c" id="situation__c" value="<%- situation__c %>" />
             <% } else { %>
@@ -350,14 +355,15 @@ function salesforceLogout() {
                 <% } %>
         </div>
         <div data-role="fieldcontain">
-        <label for="postcode__c">9. Postcode:</label>
+        <label for="postcode__c">Postcode:</label>
         <% if (typeof(postcode__c) !== 'undefined') { %>
             <input type="text" name="postcode__c" id="postcode__c" value="<%- postcode__c %>" />
             <% } else { %>
                 <input type="text" name="postcode__c" id="postcode__c" />
                 <% } %>
         </div>
-        <div data-role="fieldcontain">
+
+        <div data-role="fieldcontain" class="remove">
         <label for="anszic_code__c">10. ANZSIC code:</label>
         <select name="anszic_code__c" id="anszic_code__c">
         <option value="">Please select</option>
@@ -397,8 +403,12 @@ function salesforceLogout() {
         </fieldset>
         <fieldset data-role="collapsible">
         <legend>Initial Impressions & Environment</legend>
-        <label for="housekeeping_impression__c">1. What are the initial impressions of general housekeeping around the property?</label>
-        <textarea cols="40" rows="8" name="housekeeping_impression__c" id="housekeeping_impression__c"><% if (typeof(housekeeping_impression__c) !== 'undefined') { print(housekeeping_impression__c); } %></textarea>
+        <label for="housekeeping_impression__c" style='text-align: left;'>Please provide initial impressions of general housekeeping around the property:<span style="font-family:verdana;font-size:12px;font-style:italic;"><br>
+        (Descriptive inputs will make it easier for our underwriters to review the survey results and providw you with a more accurate reponse)</span></label>
+        <textarea cols="40" rows="18" name="housekeeping_impression__c" id="housekeeping_impression__c"><% if (typeof(housekeeping_impression__c) !== 'undefined') { print(housekeeping_impression__c); } %></textarea>
+
+<div class="remove">
+
         <label for="age_and_condition__c">2. Are the building conditions of the Farm Dwellings and Farm Buldings of an acceptable standard?</label>
         <select name="age_and_condition__c" id="age_and_condition__c">
         <option value="">Please select</option>
@@ -421,6 +431,7 @@ function salesforceLogout() {
         </select>
         <label for="roof_condition_comments__c">Please provide comments</label>
         <textarea cols="40" rows="8" name="roof_condition_comments__c" id="roof_condition_comments__c"><% if (typeof(roof_condition_comments__c) !== 'undefined') { print(roof_condition_comments__c); } %></textarea>
+</div>        
         </fieldset>
         <fieldset data-role="collapsible">
         <legend>Farm Dwellings</legend>
@@ -434,6 +445,7 @@ function salesforceLogout() {
             <p>Loading Farm Buildings...</p>
         </div>
         </fieldset>
+<div class="remove">        
         <fieldset data-role="collapsible">
         <legend>Other Structures</legend>
         <fieldset data-role="controlgroup" data-type="horizontal" id="other_structures_insured__c">
@@ -460,6 +472,7 @@ function salesforceLogout() {
                    <% }); %>
         </fieldset>
         </fieldset>
+       
         <fieldset data-role="collapsible">
         <legend>Liability</legend>
         <fieldset data-role="controlgroup" data-type="horizontal" id="frontage__c">
@@ -528,8 +541,12 @@ function salesforceLogout() {
         </fieldset>
 
         </fieldset>
+</div>        
         <fieldset data-role="collapsible">
         <legend>Overall Survey Assessment</legend>
+
+<div class="remove">
+
         <label for="overall_assessment_rating__c" class="select">1. Overall, how would you rate this property?</label>
         <select name="overall_assessment_rating__c" id="overall_assessment_rating__c">
         <option value="">Please select</option>
@@ -540,9 +557,14 @@ function salesforceLogout() {
                    <option value="<%= key %>"<% if (typeof(overall_assessment_rating__c) !== 'undefined' && overall_assessment_rating__c == key) { %> selected<% } %>><%= value %></option>
                    <% }); %>
         </select>
-        <label for="overall_assessment_comments__c">2. Please provide overall assessment comments:</label>
-        <textarea cols="40" rows="8" name="overall_assessment_comments__c" id="overall_assessment_comments__c"><% if (typeof(overall_assessment_comments__c) !== 'undefined') { print(overall_assessment_comments__c); } %></textarea>
+
+</div>
+
+        <label for="overall_assessment_comments__c"><b>Please provide reasons if you think the overall assessment of this property warrant the application of a policy discount or loading or not?</b><br><span style="font-family:verdana;font-size:12px;font-style:italic;">(Descriptive inputs will make it easier for our underwritersto review and assess the survey results and provide you with a more accurate response)</span></label>
+        <textarea placeholder="Description" cols="40" rows="8" name="overall_assessment_comments__c" id="overall_assessment_comments__c"><% if (typeof(overall_assessment_comments__c) !== 'undefined') { print(overall_assessment_comments__c); } %></textarea>
         </fieldset>
+
+<div class=remove>        
         <fieldset data-role="collapsible">
         <legend>Risk Surveyor&#39;s Recommendation</legend>
         <fieldset data-role="controlgroup" data-type="horizontal" id="policy_discount__c">
@@ -574,6 +596,7 @@ function salesforceLogout() {
         <label for="policy_discount_comments__c">3. Please provide any final survey comments:</label>
         <textarea cols="40" rows="8" name="policy_discount_comments__c" id="policy_discount_comments__c"><% if (typeof(policy_discount_comments__c) !== 'undefined') { print(policy_discount_comments__c); } %></textarea>
         </fieldset>
+</div>        
         </div>
             <fieldset class="ui-grid-b">
                 <div class="ui-block-a destroy"><button type="submit" data-theme="e">Delete</button></div>
@@ -596,14 +619,22 @@ function salesforceLogout() {
     
     <script type="text/template" id="farmdwelling-detail-template">
         <legend><% if (typeof(unique_name__c) !== 'undefined' && unique_name__c !== null) { %><%- unique_name__c %><% } else { print( "New Dwelling" ); } %></legend>
+
+
+        <div id="dwelling-photos"></div>
+
+
+
         <div data-role="fieldcontain">
-        <label for="unique_name__c">1. Name of Dwelling:</label>
+        <label for="unique_name__c">Name of Dwelling</label>
         <% if (typeof(unique_name__c) !== 'undefined') { %>
             <input name="unique_name__c" id="unique_name__c" value="<%- unique_name__c %>" />
             <% } else { %>
                 <input name="unique_name__c" id="unique_name__c" />
                 <% } %>
         </div>
+<div class="remove">
+
         <div data-role="fieldcontain">
         <label for="property_occupancy__c" class="select">2. Property Occupancy</label>
         <select name="property_occupancy__c" id="property_occupancy__c">
@@ -703,14 +734,20 @@ function salesforceLogout() {
                    <% }); %>
         </select>
         </div>
+
+</div>
+
         <div data-role="fieldcontain">
-        <label for="age__c">6. Age of Dwelling</label>
+        <label for="age__c">Age of Dwelling</label>
         <% if (typeof(age__c) !== 'undefined') { %>
             <input type="number" name="age__c" id="age__c" value="<%- age__c %>" />
             <% } else { %>
                 <input type="number" name="age__c" id="age__c" />
                 <% } %>
         </div>
+
+<div class="remove">
+
         <div data-role="fieldcontain">
         <fieldset data-role="controlgroup">
         <legend><label>7. If built prior to 1960, has it been completely rewired since 1960?</label></legend>
@@ -728,14 +765,17 @@ function salesforceLogout() {
 
         </div>
 
+</div>
+
         <div data-role="fieldcontain">
-        <label for="sum_insured__c">8. Sum Insured ($)</label>
+        <label for="sum_insured__c">Sum Insured</label>
         <% if (typeof(sum_insured__c) !== 'undefined') { %>
             <input type="text" name="sum_insured__c" id="sum_insured__c" value="<%- sum_insured__c %>" />
             <% } else { %>
                 <input type="text" name="sum_insured__c" id="sum_insured__c" />
                 <% } %>
         </div>
+
         <% if (typeof(Latitude__c) !== 'undefined' && Latitude__c !== null && typeof(Longitude__c) !== 'undefined' && Longitude__c !== null) { %>
             <div class="ui-grid-b">
                 <div class="ui-block-a">
@@ -751,15 +791,14 @@ function salesforceLogout() {
         <% } else { %>
             <div class="ui-grid-a">
                 <div class="ui-block-a">
-                    <p><label>Building location</label></p>
+                    <p><label>Dwelling location</label></p>
                 </div>
                 <div class="ui-block-b">
                     <button type="submit" class="geolocate" data-inline="true" data-theme="c">Get Current Location</button>
                 </div>
             </div>
         <% } %>
-        <div id="dwelling-photos"></div>
-        <div data-role="fieldcontain">
+        <div data-role="fieldcontain" class="remove">
         <label for="conditions__c">9. How would you rate the condition of this Dwelling?</label>
 
         <select name="conditions__c" id="conditions__c">
@@ -785,14 +824,20 @@ function salesforceLogout() {
 
     <script type="text/template" id="farmbuilding-detail-template">
         <legend><% if (typeof(unique_name__c) !== 'undefined' && unique_name__c !== null) { %><%- unique_name__c %><% } else { print( "New Building" ); } %></legend>
+
+            <div id="building-photos"></div>
+
         <div data-role="fieldcontain">
-        <label for="unique_name__c">1. Name of Building:</label>
+        <label for="unique_name__c">Name of Building:</label>
         <% if (typeof(unique_name__c) !== 'undefined') { %>
             <input name="unique_name__c" id="unique_name__c" value="<%- unique_name__c %>" />
             <% } else { %>
                 <input name="unique_name__c" id="unique_name__c" />
                 <% } %>
         </div>
+
+<div class="remove">
+
         <div data-role="fieldcontain">
         <label for="description__c" class="select">2. Description</label>
         <select name="description__c" id="description__c">
@@ -834,14 +879,20 @@ function salesforceLogout() {
                    <% }); %>
         </select>
         </div>
+
+</div>        
         <div data-role="fieldcontain">
-        <label for="age__c">4. Age of Dwelling</label>
+        <label for="age__c">Age of Building</label>
         <% if (typeof(age__c) !== 'undefined') { %>
             <input type="number" name="age__c" id="age__c" value="<%- age__c %>" />
             <% } else { %>
                 <input type="number" name="age__c" id="age__c" />
                 <% } %>
         </div>
+
+
+<div class="remove">
+
 
         <div data-role="fieldcontain" id="renovations_maintenance">
         <label for="renovations_maintenance__c">4.a. If built prior to 1960, has it had any renovations or maintenance since 1960? If so, please provide details:</label>
@@ -860,9 +911,9 @@ function salesforceLogout() {
 
         </div>
 
-
+</div>
         <div data-role="fieldcontain">
-        <label for="sum_insured__c">5. Sum Insured ($)</label>
+        <label for="sum_insured__c">Sum Insured ($)</label>
         <% if (typeof(sum_insured__c) !== 'undefined') { %>
             <input type="text" name="sum_insured__c" id="sum_insured__c" value="<%- sum_insured__c %>" />
             <% } else { %>
@@ -891,8 +942,10 @@ function salesforceLogout() {
                 </div>
             </div>
         <% } %>
-        <div id="building-photos"></div>
-        <div data-role="fieldcontain">
+
+
+
+        <div data-role="fieldcontain" class="remove">
         <label for="conditions__c">6. How would you rate the condition of this Dwelling?</label>
 
         <select name="conditions__c" id="conditions__c">
@@ -922,6 +975,10 @@ function salesforceLogout() {
                     <button type="submit" class="addPhoto" data-inline="true" data-theme="c">Attach a Photo</button>
                 </div>
             </div>
+            <label>
+            Attached Images:<br>
+            <span style="font-family:verdana;font-size:12px;font-style:italic;">(Images are critical for the assessment of all submitted surveys, you must attach at least one image in order to submit the survey for underwriting assessment. The more images you attach the easier it will be to validate a survey and more likely to provide a policy loading or discount</span>
+            </label>
             <ul id="farmphotos-list" class="farmphotos-class" data-role="listview" style="padding-top:20px; padding-bottom: 20px;">
             </ul>
         </script>        

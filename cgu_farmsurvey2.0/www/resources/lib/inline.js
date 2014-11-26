@@ -19,12 +19,8 @@ function myapp(client, userId) {
             'liability_full_details__c','liability_farm_contracting__c','liability_farm_turnover__c','liability_labour_hire__c','liability_provide_full_details_work__c','other_structures_age_condition__c'
         ],
         required: [
-            'Prepared_for__c', 'prepared_for_phone__c', 'Intermediary__c', 'intermediary_phone__c', 'Date_of_Survey__c', 'situation__c', 'postcode__c', 'anszic_code__c',
-            'housekeeping_impression__c', 'age_and_condition__c', 'roof_condition__c',
-            'other_structures_insured__c', 'other_structures_good_condition__c',
-            'frontage__c', 'fencing__c', 'non_farming_activity__c',
-            'overall_assessment_rating__c',
-            'policy_discount__c',
+            'Prepared_for__c', 'prepared_for_phone__c', 'Intermediary__c', 'intermediary_phone__c', 'Date_of_Survey__c', 'situation__c', 'postcode__c',
+            'housekeeping_impression__c',
             'Submitted__c'
         ],
         incompleteFields: function () {
@@ -47,21 +43,21 @@ function myapp(client, userId) {
         defaults: {
             'isDeleted': false,
             'unique_name__c': null,
-            'property_occupancy__c': null,
-            'description__c': null,
-            'occupancy_status__c': null,
-            'how_long_unoccupied__c' : null,
-            'how_long_anticipated__c' : null,
-            'have_services_disconnected__c' : null,
-            'how_ofen_inspected__c' : null,
-            'construction__c': null,
+            'property_occupancy__c': "default-value",
+            'description__c': "default-value",
+            'occupancy_status__c': "default-value",
+            'how_long_unoccupied__c' : "default-value",
+            'how_long_anticipated__c' : "default-value",
+            'have_services_disconnected__c' : "default-value",
+            'how_ofen_inspected__c' : "default-value",
+            'construction__c': "default-value",
             'age__c': null,
-            'rewired__c': null,
-            'rewired_comments__c': null,
+            'rewired__c': "default-value",
+            'rewired_comments__c': "default-value",
             'sum_insured__c': null,
             'Latitude__c': null,
             'Longitude__c': null,
-            'conditions__c': null
+            'conditions__c': "default-value"
         },
         toJSON: function (options) {
             var attr = _.clone(this.attributes);
